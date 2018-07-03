@@ -666,3 +666,8 @@ class CssImporter(object):
 def install_hook():
     """Installs the import hook."""
     CssImporter.install()
+
+
+def get_default_css():
+    with open(os.path.join(os.path.dirname(__file__), 'default.css'), 'r') as infp:
+        return CssStylesheet.from_css(infp.read())

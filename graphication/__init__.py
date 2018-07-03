@@ -8,8 +8,7 @@ $Id$
 
 from __future__ import absolute_import
 import graphication.css as css
-css.install_hook()
-from graphication import default_css
+default_css = css.get_default_css()
 
 from graphication.output import FileOutput
 from graphication.label import Label

@@ -28,7 +28,7 @@ for artist, plays in artists:
     ))
 
 # Initialise our style
-import graphication.examples.lastgraph_css as style
+style = css.CssStylesheet.from_css(os.path.join(os.path.dirname(__file__), './lastgraph.css'))
 
 # Colour that set!
 cr = Colourer(style)

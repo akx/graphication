@@ -2,9 +2,8 @@
 
 from __future__ import absolute_import
 import random
-from graphication import FileOutput, Node, NodeSet, NodeLink, Label, SimpleScale, css
+from graphication import FileOutput, Node, NodeSet, NodeLink, Label, SimpleScale, css, default_css as style
 from graphication.forcerel import ForceRelPlot
-from six.moves import range
 
 # Create the NodeSet, and add some nodes to it
 nodeset = NodeSet()
@@ -22,10 +21,6 @@ for i in range(20):
 # Make a scale
 value_min, value_max, value_range = nodeset.value_range()
 scale = SimpleScale(value_min, value_max, 1, 1)
-
-# Initialise our Style
-css.install_hook()
-import graphication.default_css as style
 
 # Create the output
 output = FileOutput(style)
