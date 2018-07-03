@@ -5,8 +5,12 @@ from colorsys import rgb_to_hsv, hsv_to_rgb
 from six.moves import range
 
 
+def round_int(v):
+    return int(round(v, 0))
+
+
 def rgb_to_hex(r, g, b):
-    return "#%2x%2x%2x" % (r*255, g*255, b*255)
+    return "#%2x%2x%2x" % (round_int(r*255), round_int(g*255), round_int(b*255))
 
 
 def hsv_to_hex(h, s, v):
@@ -29,7 +33,7 @@ def uninterleave(l):
     i = 0
     plus = True
     n = len(l)
-    m = n / 2
+    m = int(n / 2)
     nl = []
     for i in range(m):
         nl.append(l[i])
