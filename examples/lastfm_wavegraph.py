@@ -11,7 +11,8 @@ from graphication import SeriesSet, Series, css, Colourer, FileOutput, AutoWeekD
 from graphication.wavegraph import WaveGraph
 
 
-def p(x): print("%3.0f%% complete" % (x*100,))
+def p(x):
+    print("%3.0f%% complete" % (x*100,))
 
 
 def get_fake_lastfm_data():
@@ -25,37 +26,43 @@ def get_fake_lastfm_data():
         'Artist 3': [(ts2, 200), (ts3, 100)],
     }
 
-artists = get_fake_lastfm_data().items()
 
-# Create the series set and throw in the artists
+def main():
+    artists = get_fake_lastfm_data().items()
 
-series_set = SeriesSet()
-for artist, plays in artists:
-    series_set.add_series(Series(
-        artist,
-        dict(plays),
-    ))
+    # Create the series set and throw in the artists
 
-# Initialise our style
-style = css.CssStylesheet.from_css(os.path.join(os.path.dirname(__file__), './lastgraph.css'))
+    series_set = SeriesSet()
+    for artist, plays in artists:
+        series_set.add_series(Series(
+            artist,
+            dict(plays),
+        ))
 
-# Colour that set!
-cr = Colourer(style)
-cr.colour(series_set)
+    # Initialise our style
+    style = css.CssStylesheet.from_css(os.path.join(os.path.dirname(__file__), './lastgraph.css'))
 
-# Create the output
-output = FileOutput(style)
+    # Colour that set!
+    cr = Colourer(style)
+    cr.colour(series_set)
 
-# Weeky scale
-scale = AutoWeekDateScale(series_set)
+    # Create the output
+    output = FileOutput(style)
 
-# OK, render that.
-wg = WaveGraph(series_set, scale, style, label_curves=True)
-lb = Label("username", style)
+    # Weeky scale
+    scale = AutoWeekDateScale(series_set)
 
-width = 30*len(list(series_set.keys()))
-output.add_item(lb, x=10, y=5, width=width-20, height=20)
-output.add_item(wg, x=0, y=30, width=width, height=200)
+    # OK, render that.
+    wg = WaveGraph(series_set, scale, style, label_curves=True)
+    lb = Label("username", style)
 
-# Save the images
-output.write("pdf", "fake_lastfm.pdf")
+    width = 30*len(list(series_set.keys()))
+    output.add_item(lb, x=10, y=5, width=width-20, height=20)
+    output.add_item(wg, x=0, y=30, width=width, height=200)
+
+    # Save the images
+    output.write("pdf", "fake_lastfm.pdf")
+
+
+if __name__ == '__main__':
+    main()
