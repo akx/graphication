@@ -13,25 +13,25 @@ Graphication
 Requirements
 ============
  
- - Python 2.3 or newer
+ - Python 2.7+ or 3.3+
  - pyCairo
 
 
 Installation
 ============
 
-(as root):
-python setup.py install
+In a virtualenv:
+
+```
+pip install -e .
+```
 
 If you want instant gratification, then run one of the examples:
 
  As a script:
   python examples/random_wavegraph.py
- 
- As a module:
-  python -m "graphication.examples.random_wavegraph"
   
 Licence
-============
+=======
 
 GPLv3. See ```./LICENSE``` for full text.
