@@ -1,12 +1,14 @@
 #!/usr/bin/python
 
+from __future__ import absolute_import
 import random
 from graphication import FileOutput, Series, SeriesSet, Label, SimpleScale, css, default_css as style
 from graphication.wavegraph import WaveGraph
+from six.moves import range
 
 # Create a random multiseries
 num_points = 10
-randomvalues = lambda n: dict([(i, random.choice(range(2,25))) for i in range(n)])
+randomvalues = lambda n: dict([(i, random.choice(list(range(2,25)))) for i in range(n)])
 
 series_set = SeriesSet()
 for i in range(6):

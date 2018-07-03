@@ -1,8 +1,10 @@
 #!/usr/bin/python
 
+from __future__ import absolute_import
 import random
 from graphication import FileOutput, Series, SeriesSet, Label, SimpleScale, css, default_css as style
 from graphication.doughnut import Doughnut
+from six.moves import range
 
 colours = ["#844648","#b3c234","#244574"]
 

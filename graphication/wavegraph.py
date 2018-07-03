@@ -1,8 +1,13 @@
 
+from __future__ import absolute_import
 from graphication import default_css, Series
 from graphication.text import text_bounds
 from graphication.color import hex_to_rgba
 from graphication.scales import SimpleScale, VerticalWavegraphScale
+from six.moves import map
+from six.moves import range
+from six.moves import zip
+from functools import reduce
 
 class WaveGraph(object):
 	
@@ -68,11 +73,11 @@ class WaveGraph(object):
 			shift = 1 - total
 			
 			# Shift them down to center them
-			ys = map(lambda a: a + (shift * y_offset), ys)
+			ys = [a + (shift * y_offset) for a in ys]
 			
 			cols.append(ys)
 		
-		self.rows = zip(*cols)
+		self.rows = list(zip(*cols))
 	
 	
 	def set_size(self, width, height):
@@ -113,8 +118,9 @@ class WaveGraph(object):
 		return newpoints
 	
 	
-	def rect_union(self, (rect1, rect2)):
+	def rect_union(self, xxx_todo_changeme):
 		
+		(rect1, rect2) = xxx_todo_changeme
 		a1, b1, a2, b2 = rect1
 		x1, y1, x2, y2 = rect2
 		
@@ -140,8 +146,9 @@ class WaveGraph(object):
 			return 1
 	
 	
-	def get_text_size(self, ratio, (x1, y1, x2, y2)):
+	def get_text_size(self, ratio, xxx_todo_changeme1):
 		
+		(x1, y1, x2, y2) = xxx_todo_changeme1
 		width = abs(x2-x1)
 		height = abs(y2-y1)
 		
@@ -188,7 +195,7 @@ class WaveGraph(object):
 			# Go through and union them to collect a set of bigger boxes
 			bigboxes = [boxes]
 			for j in range(accuracy*2):
-				bigboxes.append(map(self.rect_union, off_zip(bigboxes[-1])))
+				bigboxes.append(list(map(self.rect_union, off_zip(bigboxes[-1]))))
 			
 			if i == 1 and self.debug:
 				self.labels.extend([((0, b), "") for b in bigboxes[1]])
@@ -543,4 +550,4 @@ def off_zip(l, n=2):
 	for i in range(n-1):
 		ls.append(l[i:-(n-i-1)])
 	ls.append(l[n-1:])
-	return zip(*ls)
+	return list(zip(*ls))

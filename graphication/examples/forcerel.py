@@ -1,8 +1,10 @@
 #!/usr/bin/python
 
+from __future__ import absolute_import
 import random
 from graphication import FileOutput, Node, NodeSet, NodeLink, Label, SimpleScale, css
 from graphication.forcerel import ForceRelPlot
+from six.moves import range
 
 # Create the NodeSet, and add some nodes to it
 nodeset = NodeSet()
@@ -10,7 +12,7 @@ nodeset = NodeSet()
 n = 30
 
 for i in range(n):
-	node = Node(random.choice(range(10)))
+	node = Node(random.choice(list(range(10))))
 	nodeset.add_node(node)
 
 # Add some test links

@@ -2,6 +2,7 @@
 Main testing module for Graphication
 """
 
+from __future__ import absolute_import
 import unittest
 
 # Import tests from submodules

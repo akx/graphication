@@ -1,4 +1,5 @@
 
+from __future__ import absolute_import
 from graphication import default_css, Series
 from graphication.text import text_bounds
 from graphication.color import hex_to_rgba

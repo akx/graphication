@@ -3,6 +3,7 @@ Simplish interface to parts of the Last.fm API.
 Has a built-in lock to stop requests happening at more than one per second.
 """
 
+from __future__ import absolute_import
 import os
 import time
 
@@ -50,8 +51,8 @@ def fetch(path, delay=1.0):
 	fo.close()
 	
 	# Get the requested file
-	import urllib
-	return urllib.urlopen(lastfm_api_url % path)
+	import six.moves.urllib.request, six.moves.urllib.parse, six.moves.urllib.error
+	return six.moves.urllib.request.urlopen(lastfm_api_url % path)
 
 
 
@@ -122,8 +123,8 @@ def artist_chart(username, start, end):
 	for track, artist, plays in tracks:
 		artists[artist] = artists.get(artist, 0) + plays
 	
-	artists = artists.items()
-	artists.sort(key=lambda (x,y):y)
+	artists = list(artists.items())
+	artists.sort(key=lambda x_y:x_y[1])
 	artists.reverse()
 	
 	return artists
@@ -157,8 +158,8 @@ def artist_range_chart(username, start, end, callback=lambda x:x, dated=False):
 		i += 1.0 / len(matching_weeks)
 		callback(i/2.0)
 	
-	artists = artists.items()
-	artists.sort(key=lambda (x,y):y)
+	artists = list(artists.items())
+	artists.sort(key=lambda x_y1:x_y1[1])
 	artists.reverse()
 	
 	return artists

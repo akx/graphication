@@ -1,3 +1,4 @@
+import six
 
 def hex_to_rgba(color):
 	
@@ -6,7 +7,7 @@ def hex_to_rgba(color):
 	If passed an RGBA sequence, will return it normally.
 	"""
 	
-	if not (isinstance(color, str) or isinstance(color, unicode)):
+	if not (isinstance(color, str) or isinstance(color, six.text_type)):
 		try:
 			r,g,b,a = color
 			return r,g,b,a
@@ -23,4 +24,4 @@ def hex_to_rgba(color):
 	if not hex_a:
 		hex_a = "ff"
 	
-	return map(lambda x: int(x, 16)/255.0, [hex_r, hex_g, hex_b, hex_a])
+	return [int(x, 16)/255.0 for x in [hex_r, hex_g, hex_b, hex_a]]

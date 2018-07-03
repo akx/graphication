@@ -1,4 +1,5 @@
 
+from __future__ import absolute_import
 import unittest
 
 from graphication.series import Series
@@ -21,20 +22,20 @@ class SeriesTest(unittest.TestCase):
         "Are we getting the right key and value sequences?"
         series = self.createSeries()
         self.assertEqual(
-            series.keys(),
+            list(series.keys()),
             [-4, 1, 2.5, 7, 88],
         )
         self.assertEqual(
-            series.values(),
+            list(series.values()),
             [3, 4.5, 5, 12.125, 4.25],
         )
         series = self.createEmptySeries()
         self.assertEqual(
-            series.keys(),
+            list(series.keys()),
             [],
         )
         self.assertEqual(
-            series.values(),
+            list(series.values()),
             [],
         )
 

@@ -1,8 +1,10 @@
 
+from __future__ import absolute_import
 from graphication.scales import BaseScale
 import time
 import calendar
 import datetime
+from six.moves import map
 
 
 class UTC(datetime.tzinfo):
@@ -143,7 +145,7 @@ class AutoDateScale(DateScale):
 	"""
 	
 	def __init__(self, series_set, step=None, minor_step=None):
-		self.min, self.max = map(d_to_timestamp, series_set.key_range())
+		self.min, self.max = list(map(d_to_timestamp, series_set.key_range()))
 		self.range = float(self.max - self.min)
 		self.padding = 0
 		self.highlight_weekends = False
@@ -195,7 +197,7 @@ class AutoWeekDateScale(DateScale):
 	"""
 	
 	def __init__(self, series_set, short_labels=False, month_gap=1):
-		self.min, self.max = map(d_to_timestamp, series_set.key_range())
+		self.min, self.max = list(map(d_to_timestamp, series_set.key_range()))
 		self.range = float(self.max - self.min)
 		self.short_labels = short_labels
 		self.month_gap = month_gap

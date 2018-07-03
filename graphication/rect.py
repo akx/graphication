@@ -1,4 +1,5 @@
 
+from __future__ import absolute_import
 from graphication.color import hex_to_rgba
 
 class Rect(object):

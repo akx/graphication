@@ -1,4 +1,5 @@
 
+from __future__ import absolute_import
 import sys
 
 from graphication import default_css, Series
@@ -69,7 +70,7 @@ class BarChart(Graph):
 		
 		### Draw the bars
 		# Get width per bar block
-		keys = self.series_set.keys()
+		keys = list(self.series_set.keys())
 		per_bar = self.plot_width / len(keys)
 		# Some more drawing parameters
 		zero_line = self.plot_top + self.plot_height

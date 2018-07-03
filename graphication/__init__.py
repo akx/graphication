@@ -6,6 +6,7 @@ $Id$
 """
 
 
+from __future__ import absolute_import
 import graphication.css as css
 css.install_hook()
 from graphication import default_css

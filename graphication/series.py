@@ -1,5 +1,7 @@
 
+from __future__ import absolute_import
 from graphication.css import hex_to_rgba
+from six.moves import zip
 
 
 class OrderedDict(object):
@@ -12,7 +14,7 @@ class OrderedDict(object):
 			self.ordered.append(key)
 	
 	def order(self):
-		self.ordered = self.dict.keys()
+		self.ordered = list(self.dict.keys())
 		self.ordered.sort()
 	
 	def keys(self):
@@ -67,11 +69,11 @@ class Series(object):
 	
 	
 	def keys(self):
-		return map(lambda (x,y): x, self.items())
+		return [x_y[0] for x_y in list(self.items())]
 	
 	
 	def values(self):
-		return map(lambda (x,y): y, self.items())
+		return [x_y1[1] for x_y1 in list(self.items())]
 	
 	
 	def sum(self):
@@ -79,20 +81,20 @@ class Series(object):
 	
 	
 	def items(self):
-		items = self.data.items()
+		items = list(self.data.items())
 		items.sort()
 		return items
 	
 	
 	def key_range(self):
-		keys = self.data.keys()
+		keys = list(self.data.keys())
 		if len(keys) == 0:
 			return None, None
 		return min(keys), max(keys)
 	
 	
 	def value_range(self):
-		values = self.data.values()
+		values = list(self.data.values())
 		if len(values) == 0:
 			return None, None
 		return min(values), max(values)
@@ -130,7 +132,7 @@ class Series(object):
 		constant extrapolation.
 		"""
 		
-		keys = self.keys()
+		keys = list(self.keys())
 		
 		if not keys:
 			raise ValueError("No values to interpolate between.")
@@ -233,7 +235,7 @@ class SeriesSet(object):
 	
 	def key_range(self):
 		assert len(self.series) > 0, "Cannot find the range of an empty set."
-		mins, maxs = zip(*[series.key_range() for series in self.series])
+		mins, maxs = list(zip(*[series.key_range() for series in self.series]))
 		mins = [m for m in mins if m]
 		maxs = [m for m in maxs if m]
 		return min(mins), max(maxs)
@@ -241,7 +243,7 @@ class SeriesSet(object):
 	
 	def value_range(self):
 		assert len(self.series) > 0, "Cannot find the range of an empty set."
-		mins, maxs = zip(*[series.value_range() for series in self.series])
+		mins, maxs = list(zip(*[series.value_range() for series in self.series]))
 		return min(mins), max(maxs)
 	
 	
@@ -264,9 +266,9 @@ class SeriesSet(object):
 				keys[key] = keys.get(key, []) + [series]
 		
 		if with_series:
-			keys = keys.items()
+			keys = list(keys.items())
 		else:
-			keys = keys.keys()
+			keys = list(keys.keys())
 		keys.sort()
 		return keys
 	
@@ -274,20 +276,20 @@ class SeriesSet(object):
 	def stack(self, key):
 		"""Returns a list of (series, value-at-key) tuples for the series."""
 		
-		return map(lambda x:(x,x.interpolate(key)), self.series)
+		return [(x,x.interpolate(key)) for x in self.series]
 	
 	
 	def stacks(self):
 		"""Returns a list of (key, stack) for each possible key."""
 		
-		return map(lambda x:(x, self.stack(x)), self.keys())
+		return [(x, self.stack(x)) for x in list(self.keys())]
 	
 	
 	def totals(self):
 		"""Generates a list of (key, total-at-key) tuples, in key order."""
 		
 		for key in self.keys():
-			yield key, sum(map(lambda x:x.interpolate(key), self.series))
+			yield key, sum([x.interpolate(key) for x in self.series])
 	
 	
 	def get_series(self, index):

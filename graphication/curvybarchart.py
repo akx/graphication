@@ -1,4 +1,5 @@
 
+from __future__ import absolute_import
 import sys
 import math
 
@@ -82,7 +83,7 @@ class CurvyBarChart(BarChart):
 		
 		### Draw the bars
 		# Get width per bar block
-		keys = self.series_set.keys()
+		keys = list(self.series_set.keys())
 		per_bar = float(self.plot_width) / len(keys)
 		# Some more drawing parameters
 		zero_line = self.plot_top + self.plot_height

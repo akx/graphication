@@ -1,6 +1,8 @@
 
+from __future__ import absolute_import
 from graphication import default_css
 from colorsys import rgb_to_hsv, hsv_to_rgb
+from six.moves import range
 
 
 def rgb_to_hex(r, g, b):

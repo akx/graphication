@@ -1,3 +1,4 @@
+from six.moves import range
 
 
 class Style(object):

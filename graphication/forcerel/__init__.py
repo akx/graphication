@@ -1,9 +1,11 @@
 
+from __future__ import absolute_import
 import math
 import cairo
 import random
 from graphication.color import hex_to_rgba
 from graphication.scales import SimpleScale
+from six.moves import range
 
 class ForceRelPlot(object):
 	

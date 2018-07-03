@@ -1,5 +1,6 @@
 
 
+from __future__ import absolute_import
 class BaseScale(object):
 	
 	def __init__(self, min, max, step=None, padding=None):

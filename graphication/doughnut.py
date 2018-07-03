@@ -1,4 +1,5 @@
 
+from __future__ import absolute_import
 import math
 from graphication.color import hex_to_rgba
 from graphication import css, default_css

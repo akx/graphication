@@ -1,4 +1,5 @@
 
+from __future__ import absolute_import
 import cairo
 from graphication.text import get_text_size
 from graphication.color import hex_to_rgba

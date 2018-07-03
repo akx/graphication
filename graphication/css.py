@@ -14,11 +14,14 @@ Released under the terms of the GPL, version 3.
 $Id$
 """
 
+from __future__ import absolute_import
 import re
 from UserDict import UserDict
 
 import sys, os
 from os.path import isdir, join, exists, abspath
+from six.moves import map
+import six
 
 def selector_split(string, single_class=True):
 	
@@ -78,7 +81,7 @@ def hex_to_rgba(color):
 	@type color: str, 4-tuple or 4-list
 	"""
 	
-	if not (isinstance(color, str) or isinstance(color, unicode)):
+	if not (isinstance(color, str) or isinstance(color, six.text_type)):
 		try:
 			r,g,b,a = color
 			return r,g,b,a
@@ -95,7 +98,7 @@ def hex_to_rgba(color):
 	if not hex_a:
 		hex_a = "ff"
 	
-	return map(lambda x: int(x, 16)/255.0, [hex_r, hex_g, hex_b, hex_a])
+	return [int(x, 16)/255.0 for x in [hex_r, hex_g, hex_b, hex_a]]
 
 
 
@@ -223,7 +226,7 @@ class CssRule(object):
 		@type selector: str or CssSelector
 		"""
 		
-		if isinstance(selector, str) or isinstance(selector, unicode):
+		if isinstance(selector, str) or isinstance(selector, six.text_type):
 			selector = CssSelector.from_string(selector)
 		
 		assert isinstance(selector, CssSelector), "The selector must be a CssSelector or a string."
@@ -239,7 +242,7 @@ class CssRule(object):
 		for d_shortcut, items in self.__class__.d_shortcuts.items():
 			# If it exists, apply its values as defaults
 			if d_shortcut in self.properties:
-				values = filter(lambda x:bool(x.strip()), self.properties[d_shortcut].split())
+				values = [x for x in self.properties[d_shortcut].split() if bool(x.strip())]
 				for item in items:
 					self.properties[d_shortcut+item] = self.properties.get(
 						d_shortcut+item,
@@ -289,7 +292,7 @@ class CssProperties(UserDict):
 		
 		val = self.get(key, default)
 		# Try percentages or keywords
-		if isinstance(val, str) or isinstance(val, unicode):
+		if isinstance(val, str) or isinstance(val, six.text_type):
 			if val[-1] == "%":
 				val = float(val[:-1]) / 100.0
 			else:

@@ -1,4 +1,5 @@
 
+from __future__ import absolute_import
 import cairo
 
 def get_text_size(text, box_width, box_height, font="Sans", weight=cairo.FONT_WEIGHT_NORMAL):

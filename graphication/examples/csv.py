@@ -1,11 +1,14 @@
 #!/usr/bin/python
 
+from __future__ import absolute_import
 import sys
 import random
 from graphication.output import FileOutput
 from graphication.wavegraph import WaveGraph
 from graphication.label import Label
 from graphication.series import MultiSeries, SubSeries
+from six.moves import range
+from six.moves import zip
 
 
 class ColourLoop(object):
@@ -27,8 +30,8 @@ data = []
 for line in fo:
 	data.append([int(x.strip()) for x in line.split(",")])
 
-mseries = MultiSeries(range(len(data)))
-series = zip(*data)
+mseries = MultiSeries(list(range(len(data))))
+series = list(zip(*data))
 colours = ColourLoop(["#336699", "#669933", "#993366", "#996633"])
 
 for i in range(len(labels)):
