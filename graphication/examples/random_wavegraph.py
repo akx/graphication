@@ -8,16 +8,19 @@ from six.moves import range
 
 # Create a random multiseries
 num_points = 10
-randomvalues = lambda n: dict([(i, random.choice(list(range(2,25)))) for i in range(n)])
+
+
+def randomvalues(n): return dict([(i, random.choice(list(range(2, 25)))) for i in range(n)])
+
 
 series_set = SeriesSet()
 for i in range(6):
-	series_set.add_series(Series(
-		"Series%s" % i,
-		randomvalues(num_points),
-		"#3366%2xff" % (50*i),
-		{0:(i-1)%5,5:0},
-	))
+    series_set.add_series(Series(
+        "Series%s" % i,
+        randomvalues(num_points),
+        "#3366%2xff" % (50*i),
+        {0: (i-1) % 5, 5: 0},
+    ))
 
 # Create the output
 output = FileOutput()

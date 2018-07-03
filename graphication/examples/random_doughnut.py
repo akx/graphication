@@ -6,15 +6,15 @@ from graphication import FileOutput, Series, SeriesSet, Label, SimpleScale, css,
 from graphication.doughnut import Doughnut
 from six.moves import range
 
-colours = ["#844648","#b3c234","#244574"]
+colours = ["#844648", "#b3c234", "#244574"]
 
 series_set = SeriesSet()
 for i in range(3):
-	series_set.add_series(Series(
-		"Series%s" % i,
-		{0: random.randint(1,100)},
-		colours[i%3]
-	))
+    series_set.add_series(Series(
+        "Series%s" % i,
+        {0: random.randint(1, 100)},
+        colours[i % 3]
+    ))
 
 # Create the output
 output = FileOutput(padding=5)

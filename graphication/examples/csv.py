@@ -12,14 +12,16 @@ from six.moves import zip
 
 
 class ColourLoop(object):
-	def __init__(self, colours):
-		self.colours = colours
-	def __iter__(self):
-		while 1:
-			yield self.pop()
-	def pop(self):
-		self.colours = self.colours[1:] + self.colours[:1]
-		return self.colours[-1]
+    def __init__(self, colours):
+        self.colours = colours
+
+    def __iter__(self):
+        while 1:
+            yield self.pop()
+
+    def pop(self):
+        self.colours = self.colours[1:] + self.colours[:1]
+        return self.colours[-1]
 
 
 # Read in the data
@@ -28,15 +30,15 @@ fo = open(filename)
 labels = [x.strip() for x in fo.readline().split(",")]
 data = []
 for line in fo:
-	data.append([int(x.strip()) for x in line.split(",")])
+    data.append([int(x.strip()) for x in line.split(",")])
 
 mseries = MultiSeries(list(range(len(data))))
 series = list(zip(*data))
 colours = ColourLoop(["#336699", "#669933", "#993366", "#996633"])
 
 for i in range(len(labels)):
-	label = labels[i]
-	mseries.add_series(SubSeries(label, series[i], colours.pop()))
+    label = labels[i]
+    mseries.add_series(SubSeries(label, series[i], colours.pop()))
 
 # Initialise our Style
 from graphication.style import Style

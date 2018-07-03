@@ -4,6 +4,7 @@ import unittest
 
 from graphication.series import Series
 
+
 class SeriesTest(unittest.TestCase):
 
     def createSeries(self):
@@ -39,7 +40,6 @@ class SeriesTest(unittest.TestCase):
             [],
         )
 
-
     def test_ranges(self):
         "Are the ranges coming out right?"
         series = self.createSeries()
@@ -61,7 +61,6 @@ class SeriesTest(unittest.TestCase):
             (None, None),
         )
 
-
     def test_interpolation(self):
         "Interpolation should work, linearly, and extrapolation constantly"
         series = self.createSeries()
@@ -71,12 +70,11 @@ class SeriesTest(unittest.TestCase):
         self.assertEqual(series.interpolate(-7), 3)
         self.assertEqual(series.interpolate(424324.5), 4.25)
 
-
     def test_style(self):
         "Ensure series styles work correctly"
         series = Series(
             "Test",
-            {0:1,1:2,2:3,3:4},
+            {0: 1, 1: 2, 2: 3, 3: 4},
             styles={
                 0: Series.STYLE_NONE,
                 2: Series.STYLE_DASHED,

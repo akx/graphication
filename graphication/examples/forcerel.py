@@ -12,12 +12,12 @@ nodeset = NodeSet()
 n = 30
 
 for i in range(n):
-	node = Node(random.choice(list(range(10))))
-	nodeset.add_node(node)
+    node = Node(random.choice(list(range(10))))
+    nodeset.add_node(node)
 
 # Add some test links
 for i in range(20):
-	nodeset.add_link(NodeLink(random.choice(nodeset.nodes), random.choice(nodeset.nodes)))
+    nodeset.add_link(NodeLink(random.choice(nodeset.nodes), random.choice(nodeset.nodes)))
 
 # Make a scale
 value_min, value_max, value_range = nodeset.value_range()
