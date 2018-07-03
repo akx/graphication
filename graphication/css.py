@@ -16,7 +16,6 @@ $Id$
 
 from __future__ import absolute_import
 import re
-from UserDict import UserDict
 
 import sys
 import os
@@ -238,7 +237,7 @@ class CssRule(object):
         return "<CssRule; %i properties, selector %s>" % (len(self.properties), self.selector)
 
 
-class CssProperties(UserDict):
+class CssProperties(dict):
 
     """
     Like a dictionary, except it has things like get_int and get_list methods.
